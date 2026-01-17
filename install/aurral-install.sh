@@ -3,7 +3,7 @@
 # Copyright (c) 2024 W-Matt
 # Author: W-Matt
 # License: MIT
-# https://github.com/W-Matt/scripts/blob/main/LICENSE
+# Source: https://github.com/lklynet/aurral
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -41,7 +41,6 @@ mkdir -p /opt/aurral
 cd /opt/aurral
 $STD git clone https://github.com/lklynet/aurral.git /opt/aurral
 
-# Create .env file
 cat > /opt/aurral/.env <<'ENVEOF'
 # Aurral Environment Configuration
 # Last.fm API (optional - for scrobbling)
@@ -59,7 +58,6 @@ HOST=0.0.0.0
 MEDIA_DIR=/media
 ENVEOF
 
-# Create media and data directories
 mkdir -p /opt/aurral/media
 mkdir -p /opt/aurral/data
 
@@ -94,4 +92,3 @@ msg_info "Cleaning up"
 $STD apt-get autoremove
 $STD apt-get autoclean
 msg_ok "Cleaned"
-
