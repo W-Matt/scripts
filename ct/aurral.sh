@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+# Override default repo BEFORE sourcing build.func
+export GH_HEAD="https://raw.githubusercontent.com/W-Matt/scripts/main"
+
 source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2024 W-Matt
 # Author: W-Matt
