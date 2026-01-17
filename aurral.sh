@@ -37,7 +37,7 @@ HOSTNAME="aurral"
 DISK_SIZE="8"
 CORES="2"
 MEMORY="2048"
-STORAGE="local-lvm"
+STORAGE="Split"
 TEMPLATE_STORAGE="local"
 OS_TYPE="ubuntu"
 OS_VERSION="22.04"
@@ -79,7 +79,7 @@ msg_ok "Template ready"
 
 # Create container
 msg_info "Creating LXC Container..."
-pct create $CTID ${TEMPLATE_STORAGE}:vztmpl/$TEMPLATE \
+if ! pct create $CTID ${TEMPLATE_STORAGE}:vztmpl/$TEMPLATE \
     --hostname $HOSTNAME \
     --cores $CORES \
     --memory $MEMORY \
@@ -89,7 +89,9 @@ pct create $CTID ${TEMPLATE_STORAGE}:vztmpl/$TEMPLATE \
     --onboot 1 \
     --features nesting=1 \
     --ostype ubuntu \
-    --password $(openssl rand -base64 12) >/dev/null 2>&1
+    --password $(openssl rand -base64 12); then
+    msg_error "Failed to create container"
+fi
 
 msg_ok "LXC Container $CTID created"
 
